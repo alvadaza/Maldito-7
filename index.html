@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(90deg, rgba(230,191,11,1) 0%, rgba(0,212,255,1) 100%);
+        }
+        .title {
+            text-align: center;
+        }
+        .number {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #000;
+            cursor: pointer;
+            text-align: center;
+            font-size: 50px;
+            background: whitesmoke;
+            
+        }
+
+        .number.active {
+            background-color: #FF5733;
+        }
+
+        .dice-container {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .dice {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+    </style>
+    <title>Números Coloreados y Dados</title>
+</head>
+<body>
+    <div class="title">
+        <h2>Juega Maldito 7</h2>
+    </div>
+    <div class="numbers">
+        <span class="number" onclick="changeColor(this)">2</span>
+        <span class="number" onclick="changeColor(this)">3</span>
+        <span class="number" onclick="changeColor(this)">4</span>
+        <span class="number" onclick="changeColor(this)">5</span>
+        <span class="number" onclick="changeColor(this)">6</span>
+        <span class="number" onclick="changeColor(this)">7</span>
+        <span class="number" onclick="changeColor(this)">8</span>
+        <span class="number" onclick="changeColor(this)">9</span>
+        <span class="number" onclick="changeColor(this)">10</span>
+        <span class="number" onclick="changeColor(this)">11</span>
+        <span class="number" onclick="changeColor(this)">12</span>
+    </div>
+
+    <button onclick="resetColors()">Reiniciar</button>
+
+    <button onclick="rollDice()">Jugar</button>
+    <div class="dice-container">
+        <div class="dice" id="die1">
+        </div>
+        <div class="dice" id="die2"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+  
+    <script>
+        function changeColor(numberElement) {
+            numberElement.classList.toggle('active');
+        }
+
+        function resetColors() {
+            const numbers = document.querySelectorAll('.number');
+            numbers.forEach(number => number.classList.remove('active'));
+        }
+
+        function rollDice() {
+            const die1 = document.getElementById('die1');
+            const die2 = document.getElementById('die2');
+            
+            // Selecciona números aleatorios para los dados (del 1 al 6).
+            const result1 = Math.floor(Math.random() * 6) + 1;
+            const result2 = Math.floor(Math.random() * 6) + 1;
+
+            // Configura las caras de los dados con los números aleatorios.
+            die1.innerText = result1;
+            die2.innerText = result2;
+
+            // Reinicia las propiedades de transformación antes de iniciar la animación.
+            gsap.set([die1, die2], { rotationX: 0, rotationY: 0 });
+
+            // Realiza una animación de lanzamiento con GSAP.
+            gsap.to(die1, { rotationX: 720, duration: 1, ease: "power3.out" });
+            gsap.to(die2, { rotationY: 720, duration: 1, ease: "power3.out" });
+        }
+    </script>
+</body>
+</html>
