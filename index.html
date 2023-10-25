@@ -55,6 +55,21 @@
             font-weight: bold;
             margin-left: 50px;
         }
+        .image img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            translate: 240px;
+            transform: translateY(-105px);
+            border: 1px solid black;
+            object-fit: cover;
+        }
+        @media screen and (min-width: 740px) {
+            .image img {
+            transform: translateX(345px);
+            top: 185px;
+             }
+        }
     </style>
     <title>Números Coloreados y Dados</title>
 </head>
@@ -74,6 +89,9 @@
         <span class="number" onclick="changeColor(this)">10</span>
         <span class="number" onclick="changeColor(this)">11</span>
         <span class="number" onclick="changeColor(this)">12</span>
+    </div>
+    <div class="image">
+        <img src="https://res.cloudinary.com/dkbhklncz/image/upload/v1673021431/icono_vzgexr.jpg" alt="">
     </div>
 
     <button onclick="resetColors()">Reiniciar</button>
